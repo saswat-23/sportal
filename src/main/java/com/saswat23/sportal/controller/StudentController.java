@@ -8,7 +8,8 @@ public class StudentController {
 	
 	@RequestMapping("/")
 	public String getHomePage() {
-		return "index.jsp";
+		System.out.println("HomePage...");
+		return "home";
 	}
 	
 }
