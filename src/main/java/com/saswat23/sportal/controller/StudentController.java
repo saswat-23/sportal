@@ -1,8 +1,11 @@
 package com.saswat23.sportal.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.saswat23.sportal.model.Student;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -10,22 +13,26 @@ import jakarta.servlet.http.HttpSession;
 public class StudentController {
 	
 	@RequestMapping({"/","/home"})
-	public String getHomePage() {
-		System.out.println("HomePage...");
+	public String getHomePage(HttpSession session) {
 		return "home";
 	}
 	
 	@RequestMapping("/setUser")
-	public String setUser(@RequestParam(required = true, name = "userid") String userid, HttpSession session) {
-		System.out.println("SetUser called. "+userid);
-		session.setAttribute("userId", userid);
+	public String setUser(@ModelAttribute("stud") Student stud, HttpSession session) {
+		session.setAttribute("user", stud.getUserid());
+		
 		return "dashboard";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		System.out.println("Logout called.. "+session.getAttribute("userId"));
 		return "logout";
+	}
+	
+	@RequestMapping("/confirmLogout")
+	public String confirmLogout(HttpSession session) {
+		session.removeAttribute("user");
+		return getHomePage(session);
 	}
 	
 }

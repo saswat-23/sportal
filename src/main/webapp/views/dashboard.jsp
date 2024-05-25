@@ -7,11 +7,11 @@
 <title>Dashboard</title>
 </head>
 <body>
-	<h1>Welcome ${userId}</h1>
+	<h1>Welcome ${stud.userid} to Student Portal</h1>
 	<h3>This is your dashboard</h3>
 	<br>
 	<br>
 	<br>
-	<a href="logout">Click here to logout</a>
+	<a href="logout">Click here to logout</a><br>
 </body>
 </html>
