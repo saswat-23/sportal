@@ -10,7 +10,7 @@ import com.saswat23.sportal.model.Student;
 @Repository
 public class StudentRepo {
 
-	List<Student> students;
+	private List<Student> students;
 	
 	{
 		students = new ArrayList<Student>();
@@ -27,6 +27,29 @@ public class StudentRepo {
 		if(!students.isEmpty()) {
 			students.clear();
 		}
+		return students;
+	}
+
+	public Student delete(Student stud) {
+		for (Student student : students) {
+			if(student.getUserid().equals(stud.getUserid())) {
+				//delete
+			}
+		}
+		return stud;
+	}
+
+	public Student update(Student stud) {
+		for (Student student : students) {
+			if(student.getUserid().equals(stud.getUserid())) {
+				//update
+			}
+		}
+		return stud;
+	}
+
+	public List<Student> add(Student stud) {
+		students.add(stud);
 		return students;
 	}
 

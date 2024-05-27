@@ -13,7 +13,7 @@ import com.saswat23.sportal.repo.StudentRepo;
 public class StudentService {
 
 	@Autowired
-	StudentRepo repo;
+	private StudentRepo repo;
 	
 	public List<Student> getAllStudents() {
 		return repo.findAll();
@@ -27,6 +27,18 @@ public class StudentService {
 			return true;
 		}
 		return false;
+	}
+
+	public Student deleteStudent(Student stud) {
+		return repo.delete(stud);
+	}
+
+	public Student updateStudent(Student stud) {
+		return repo.update(stud);
+	}
+
+	public List<Student> addStudent(Student stud) {
+		return repo.add(stud);
 	}
 	
 }
