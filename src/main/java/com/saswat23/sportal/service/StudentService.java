@@ -41,4 +41,8 @@ public class StudentService {
 		return repo.add(stud);
 	}
 	
+	public List<Student> restoreStudentData() {
+		return repo.restoreStudents();
+	}
+	
 }

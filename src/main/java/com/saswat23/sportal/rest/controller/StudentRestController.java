@@ -29,6 +29,15 @@ public class StudentRestController {
 		service.deleteStudent(stud);
 	}
 	
+	@RequestMapping(path = "/deleteAll", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteAllStudents() {
+		if(service.deleteAllStudents()) {
+			return "All student details deleted successfully!";
+		}
+		return "Student data not deleted!"+getAllStudents().toString();
+	}
+	
 	@RequestMapping("/updateStudent")
 	public void updateStudent(Student stud) {
 		service.updateStudent(stud);
@@ -37,5 +46,11 @@ public class StudentRestController {
 	@RequestMapping("/addStudent")
 	public void addStudent(Student stud) {
 		service.addStudent(stud);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/restoreData")
+	@ResponseBody
+	public List<Student> restoreAllStudents() {
+		return service.restoreStudentData();
 	}
 }

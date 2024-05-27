@@ -13,10 +13,7 @@ public class StudentRepo {
 	private List<Student> students;
 	
 	{
-		students = new ArrayList<Student>();
-		students.add(new Student("S101","Saswat",12,67.5d));
-		students.add(new Student("S102","Sarita",15,96.3d));
-		students.add(new Student("S103","Dadu",29,81.7d));
+		restoreData();
 	}
 	
 	public List<Student> findAll() {
@@ -51,6 +48,19 @@ public class StudentRepo {
 	public List<Student> add(Student stud) {
 		students.add(stud);
 		return students;
+	}
+
+	public List<Student> restoreStudents() {
+		restoreData();
+		return students;
+	}
+	
+	private void restoreData() {
+		students = new ArrayList<Student>();
+		students.add(new Student("S101","Saswat",12,67.5d));
+		students.add(new Student("S102","Sarita",15,96.3d));
+		students.add(new Student("S103","Dadu",29,81.7d));
+		students.add(new Student("S104","Lovely",35,99.01d));
 	}
 
 }
