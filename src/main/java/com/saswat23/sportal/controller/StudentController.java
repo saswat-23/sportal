@@ -2,6 +2,7 @@ package com.saswat23.sportal.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -9,10 +10,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.saswat23.sportal.model.Student;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 @SessionAttributes({"prefixUrl","principalName","user"})
+@ControllerAdvice
 public class StudentController {
 	
 	int cnt = 0;

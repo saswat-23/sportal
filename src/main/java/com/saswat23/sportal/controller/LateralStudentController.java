@@ -20,12 +20,12 @@ public class LateralStudentController {
 	}
 	
 	@RequestMapping({"/lateral"})
-	public String getHomePage(Model model, HttpSession httpSession, @SessionAttribute("user") String user) {
+	public String getHomePage(Model model, HttpSession httpSession) {
 		
 		System.out.println("Inside lateral request...");
 		System.out.println("lateral model student: "+model.getAttribute("stud"));
 		System.out.println("lateral session student: "+httpSession.getAttribute("stud"));
-		System.out.println("lateral sessionAttr user: "+user);
+//		System.out.println("lateral sessionAttr user: "+user);
 		return "home";
 	}
 	
