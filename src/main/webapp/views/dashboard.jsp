@@ -10,6 +10,7 @@
 	<h1>Welcome ${stud.userid} to Student Portal</h1>
 	<h3>This is your dashboard</h3>
 	<br>
+		${stud}
 	<br>
 	<br>
 	<a href="logout">Click here to logout</a><br>
