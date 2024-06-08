@@ -1,10 +1,10 @@
 package com.saswat23.sportal.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.saswat23.sportal.model.Student;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,8 +20,12 @@ public class LateralStudentController {
 	}
 	
 	@RequestMapping({"/lateral"})
-	public String getHomePage(HttpSession session) {
+	public String getHomePage(Model model, HttpSession httpSession, @SessionAttribute("user") String user) {
+		
 		System.out.println("Inside lateral request...");
+		System.out.println("lateral model student: "+model.getAttribute("stud"));
+		System.out.println("lateral session student: "+httpSession.getAttribute("stud"));
+		System.out.println("lateral sessionAttr user: "+user);
 		return "home";
 	}
 	
