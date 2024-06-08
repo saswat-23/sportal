@@ -44,5 +44,10 @@ public class StudentService {
 	public List<Student> restoreStudentData() {
 		return repo.restoreStudents();
 	}
+
+	public Student getStudent(String studentId) {
+		// TODO Auto-generated method stub
+		return repo.getStudent(studentId);
+	}
 	
 }

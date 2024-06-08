@@ -2,6 +2,7 @@ package com.saswat23.sportal.repo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,9 @@ import com.saswat23.sportal.model.Student;
 public class StudentRepo {
 
 	private List<Student> students;
+	
+	private BiPredicate<String, String> studIdMatchPredicate = (sid1, sid2) -> sid1.equals(sid2);
+	
 	
 	{
 		restoreData();
@@ -61,6 +65,16 @@ public class StudentRepo {
 		students.add(new Student("S102","Sarita",15,96.3d));
 		students.add(new Student("S103","Dadu",29,81.7d));
 		students.add(new Student("S104","Lovely",35,99.01d));
+	}
+
+	public Student getStudent(String studentId) {
+
+		for (Student student : students) {
+			if(studIdMatchPredicate.test(studentId, student.getUserid())) {
+				return student;
+			}
+		}
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,5 +53,11 @@ public class StudentRestController {
 	@ResponseBody
 	public List<Student> restoreAllStudents() {
 		return service.restoreStudentData();
+	}
+	
+	@RequestMapping(method =  RequestMethod.GET, path = "/getStudent/{studentId}")
+	@ResponseBody
+	public Student getStudent(@PathVariable("studentId") String studentId) {
+		return service.getStudent(studentId);
 	}
 }
