@@ -38,8 +38,7 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/json",
-						"disabled": true
+						"value": "application/xml"
 					}
 				],
 				"url": {
