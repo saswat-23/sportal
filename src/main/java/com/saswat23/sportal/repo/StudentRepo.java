@@ -2,84 +2,90 @@ package com.saswat23.sportal.repo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiPredicate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SimplePropertyRowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.saswat23.sportal.model.Student;
 
 @Repository
 public class StudentRepo {
 
+	@Autowired
+	public JdbcTemplate jdbcTemplate;
+	
+	RowMapper<Student> studentRowMapper = new SimplePropertyRowMapper<>(Student.class);
+	
 	private List<Student> students;
 	
-	private BiPredicate<String, String> studIdMatchPredicate = (sid1, sid2) -> sid1.equals(sid2);
-	
-	
-	{
-		restoreData();
-	}
+//	private BiPredicate<String, String> studIdMatchPredicate = (sid1, sid2) -> sid1.equals(sid2);
 	
 	public List<Student> findAll() {
+		String sql = "select * from student;";
+		students = jdbcTemplate.query(sql, studentRowMapper);
 		return students;
 	}
 
 	public List<Student> deleteAll() {
-		if(!students.isEmpty()) {
-			students.clear();
-		}
-		return students;
+		String sql = "delete from student;";
+		if(jdbcTemplate.update(sql)>0)
+			System.out.println("Records deleted from student table.");
+		return findAll();
 	}
 
 	public boolean delete(Student stud) {
-		boolean removeStat = false;
-		for (Student student : students) {
-			if(student.getUserid().equals(stud.getUserid())) {
-				removeStat = students.remove(student);
-				break;
-			}
-		}
-		return removeStat;
+		String sql = "delete from student where userid=?";
+		int res = jdbcTemplate.update(sql, stud.getUserid());
+		return res>0?true:false;
 	}
 
 	public Student update(Student stud) {
-		boolean updtStat=false;
-		for (Student student : students) {
-			if(studIdMatchPredicate.test(stud.getUserid(), student.getUserid())) {
-				student.copyValues(stud);
-				updtStat = true;
-				break;
-			}
+		if(getStudent(stud.getUserid())==null) {
+			return null;
 		}
-		return updtStat?stud:null;
+		String sql = "update student from student where userid=?";
+		int res = jdbcTemplate.update(sql, stud.getUserid());
+		return res>0?getStudent(stud.getUserid()):null;
 	}
 
 	public List<Student> add(Student stud) {
-		students.add(stud);
-		return students;
+		String sql = "insert into student (userid, username, rollno, marks) values (?,?,?,?)";
+		jdbcTemplate.update(sql, stud.getUserid(), stud.getUsername(), stud.getRollNo(), stud.getMarks());
+		return findAll();
 	}
 
 	public List<Student> restoreStudents() {
 		restoreData();
-		return students;
+		return findAll();
 	}
 	
+	@Transactional
 	private void restoreData() {
 		students = new ArrayList<Student>();
-		students.add(new Student("S101","Saswat",12,67.5d));
-		students.add(new Student("S102","Sarita",15,96.3d));
-		students.add(new Student("S103","Dadu",29,81.7d));
-		students.add(new Student("S104","Lovely",35,99.01d));
+		students.add(new Student("S111","Saswat",12,67.5d));
+		students.add(new Student("S112","Sarita",15,96.3d));
+		students.add(new Student("S113","Dadu",29,81.7d));
+		students.add(new Student("S114","Lovely",35,99.01d));
+		
+		String sql = "insert into student (userid, username, rollno, marks) values (?,?,?,?);";
+		
+		try {
+			students.forEach(s-> jdbcTemplate.update(sql, s.getUserid(), s.getUsername(), s.getRollNo(), s.getMarks()));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public Student getStudent(String studentId) {
-
-		for (Student student : students) {
-			if(studIdMatchPredicate.test(studentId, student.getUserid())) {
-				return student;
-			}
-		}
-		return null;
+		String sql = "select * from student where userid = ?";
+		Student stud = jdbcTemplate.queryForObject(sql, studentRowMapper, studentId);
+		return stud;
 	}
-
+	
 }

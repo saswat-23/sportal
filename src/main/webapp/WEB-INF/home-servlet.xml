@@ -21,6 +21,19 @@
    		</mvc:message-converters>
 	</mvc:annotation-driven>
 
+	<ctx:property-placeholder location="classpath:jdbc_config.properties" />
+	<bean id="jdbcDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- inject values from properties file -->
+		<property name="driverClassName" value="${jdbc.datasource.driver-class-name}" />
+		<constructor-arg name="url" value="${jdbc.datasource.url}"></constructor-arg>
+		<constructor-arg name="username" value="${jdbc.datasource.username}"></constructor-arg>
+		<constructor-arg name="password" value="${jdbc.datasource.password}"></constructor-arg>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg name="dataSource" ref="jdbcDatasource"></constructor-arg>
+	</bean>
+
     <!-- bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/" />
 		<property name="suffix" value=".jsp" />
