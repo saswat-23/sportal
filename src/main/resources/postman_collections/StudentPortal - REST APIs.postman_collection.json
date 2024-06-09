@@ -38,7 +38,8 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "application/xml"
+						"value": "application/xml",
+						"disabled": true
 					}
 				],
 				"url": {
@@ -88,10 +89,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userid\": \"S199\",\r\n    \"username\": \"Mr. Admin\",\r\n    \"rollNo\": 7,\r\n    \"marks\": 99.99\r\n}",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n <root>\r\n     <userid>S199</userid>\r\n     <username>Mr. Admin</username>\r\n     <rollNo>7</rollNo>\r\n     <marks>99.99</marks>\r\n </root>",
 					"options": {
 						"raw": {
-							"language": "json"
+							"language": "xml"
 						}
 					}
 				},

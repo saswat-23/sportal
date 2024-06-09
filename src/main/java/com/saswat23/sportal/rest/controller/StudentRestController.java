@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saswat23.sportal.model.Student;
@@ -22,13 +20,13 @@ public class StudentRestController {
 	@Autowired
 	private StudentService service;
 	
-	@GetMapping({"/", "/students"})
+	@GetMapping(path={"/", "/students"}, produces = {"application/json"})
 	public List<Student> getAllStudents() {
 		List<Student> studs = service.getAllStudents();
 		return studs;
 	}
 	
-	@PostMapping("/student")
+	@PostMapping(path = "/student", consumes = "application/xml")
 	public void addStudent(@RequestBody Student stud) {
 		service.addStudent(stud);
 	}
