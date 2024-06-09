@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "463f0983-5703-4455-8f15-00773e24431c",
+		"name": "StudentPortal - REST APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8761755"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/sportal/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/sportal/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/students",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/sportal/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/student/S103",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/sportal/student/S103",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"student",
+						"S103"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": \"S199\",\r\n    \"username\": \"Mr. Admin\",\r\n    \"rollNo\": 7,\r\n    \"marks\": 99.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sportal/student",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/student/S199",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sportal/student/S199",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"student",
+						"S199"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": \"S199\",\r\n    \"username\": \"James Bond\",\r\n    \"rollNo\": 77,\r\n    \"marks\": 88.77\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sportal/student",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/sportal/restoreData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sportal/restoreData",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sportal",
+						"restoreData"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
