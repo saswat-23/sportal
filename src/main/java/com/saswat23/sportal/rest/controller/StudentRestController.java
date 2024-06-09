@@ -20,17 +20,40 @@ public class StudentRestController {
 	@Autowired
 	private StudentService service;
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/")
+	@RequestMapping(path = {"/", "/students"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<Student> getAllStudents() {
 		List<Student> studs = service.getAllStudents();
 		return studs;
 	}
 	
-//	@RequestMapping("/deleteStudent")
-//	public void deleteStudent(Student stud) {
-//		service.deleteStudent(stud);
-//	}
+	@RequestMapping(path = "/student", method = RequestMethod.POST)
+	@ResponseBody
+	public void addStudent(@RequestBody Student stud) {
+		service.addStudent(stud);
+	}
+	
+	
+	@RequestMapping(path = "/student/{studentId}", method =  RequestMethod.GET)
+	@ResponseBody
+	public Student getStudent(@PathVariable("studentId") String studentId) {
+		return service.getStudent(studentId);
+	}
+	
+	
+	@RequestMapping(path = "/student", method = RequestMethod.PUT)
+	@ResponseBody
+	public Student updateStudent(@RequestBody Student student) {
+		return service.updateStudent(student);
+	}
+	
+	@RequestMapping(path = "/student/{studentId}", method =  RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteStudent(@PathVariable("studentId") String studentId) {
+		Student stud = new Student();
+		stud.setUserid(studentId);
+		return service.deleteStudent(stud);
+	}
 	
 	@RequestMapping(path = "/deleteAll", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -41,15 +64,6 @@ public class StudentRestController {
 		return "Student data not deleted!"+getAllStudents().toString();
 	}
 	
-//	@RequestMapping("/updateStudent")
-//	public void updateStudent(Student stud) {
-//		service.updateStudent(stud);
-//	}
-	
-	@RequestMapping("/addStudent")
-	public void addStudent(Student stud) {
-		service.addStudent(stud);
-	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/restoreData")
 	@ResponseBody
@@ -57,23 +71,4 @@ public class StudentRestController {
 		return service.restoreStudentData();
 	}
 	
-	@RequestMapping(method =  RequestMethod.GET, path = "/getStudent/{studentId}")
-	@ResponseBody
-	public Student getStudent(@PathVariable("studentId") String studentId) {
-		return service.getStudent(studentId);
-	}
-	
-	@RequestMapping(method =  RequestMethod.PUT, path = "/updateStudent/{studentId}")
-	@ResponseBody
-	public Student updateStudent(@RequestBody Student student) {
-		return service.updateStudent(student);
-	}
-	
-	@RequestMapping(method =  RequestMethod.DELETE, path = "/deleteStudent/{studentId}")
-	@ResponseBody
-	public String deleteStudent(@PathVariable("studentId") String studentId) {
-		Student stud = new Student();
-		stud.setUserid(studentId);
-		return service.deleteStudent(stud);
-	}
 }
