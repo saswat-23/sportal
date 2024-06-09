@@ -31,22 +31,27 @@ public class StudentRepo {
 		return students;
 	}
 
-	public Student delete(Student stud) {
+	public boolean delete(Student stud) {
+		boolean removeStat = false;
 		for (Student student : students) {
 			if(student.getUserid().equals(stud.getUserid())) {
-				//delete
+				removeStat = students.remove(student);
+				break;
 			}
 		}
-		return stud;
+		return removeStat;
 	}
 
 	public Student update(Student stud) {
+		boolean updtStat=false;
 		for (Student student : students) {
-			if(student.getUserid().equals(stud.getUserid())) {
-				//update
+			if(studIdMatchPredicate.test(stud.getUserid(), student.getUserid())) {
+				student.copyValues(stud);
+				updtStat = true;
+				break;
 			}
 		}
-		return stud;
+		return updtStat?stud:null;
 	}
 
 	public List<Student> add(Student stud) {

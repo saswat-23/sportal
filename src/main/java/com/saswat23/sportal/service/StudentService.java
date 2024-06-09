@@ -29,11 +29,15 @@ public class StudentService {
 		return false;
 	}
 
-	public Student deleteStudent(Student stud) {
-		return repo.delete(stud);
+	public String deleteStudent(Student stud) {
+		return repo.delete(stud)?"Student ["+stud.getUserid()+"] deleted successfully!"
+								:"Student ["+stud.getUserid()+"] couldn't be deleted!";
 	}
 
 	public Student updateStudent(Student stud) {
+		if(stud.getUserid()==null) {
+			return new Student("-1","-1",-1,-1d);
+		}
 		return repo.update(stud);
 	}
 
@@ -46,7 +50,6 @@ public class StudentService {
 	}
 
 	public Student getStudent(String studentId) {
-		// TODO Auto-generated method stub
 		return repo.getStudent(studentId);
 	}
 	

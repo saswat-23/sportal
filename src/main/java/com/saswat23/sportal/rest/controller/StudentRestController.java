@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +27,10 @@ public class StudentRestController {
 		return studs;
 	}
 	
-	@RequestMapping("/deleteStudent")
-	public void deleteStudent(Student stud) {
-		service.deleteStudent(stud);
-	}
+//	@RequestMapping("/deleteStudent")
+//	public void deleteStudent(Student stud) {
+//		service.deleteStudent(stud);
+//	}
 	
 	@RequestMapping(path = "/deleteAll", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -39,10 +41,10 @@ public class StudentRestController {
 		return "Student data not deleted!"+getAllStudents().toString();
 	}
 	
-	@RequestMapping("/updateStudent")
-	public void updateStudent(Student stud) {
-		service.updateStudent(stud);
-	}
+//	@RequestMapping("/updateStudent")
+//	public void updateStudent(Student stud) {
+//		service.updateStudent(stud);
+//	}
 	
 	@RequestMapping("/addStudent")
 	public void addStudent(Student stud) {
@@ -59,5 +61,19 @@ public class StudentRestController {
 	@ResponseBody
 	public Student getStudent(@PathVariable("studentId") String studentId) {
 		return service.getStudent(studentId);
+	}
+	
+	@RequestMapping(method =  RequestMethod.PUT, path = "/updateStudent/{studentId}")
+	@ResponseBody
+	public Student updateStudent(@RequestBody Student student) {
+		return service.updateStudent(student);
+	}
+	
+	@RequestMapping(method =  RequestMethod.DELETE, path = "/deleteStudent/{studentId}")
+	@ResponseBody
+	public String deleteStudent(@PathVariable("studentId") String studentId) {
+		Student stud = new Student();
+		stud.setUserid(studentId);
+		return service.deleteStudent(stud);
 	}
 }

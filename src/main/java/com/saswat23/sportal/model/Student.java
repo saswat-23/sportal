@@ -52,4 +52,11 @@ public class Student {
 		return "Student [userid=" + userid + ", username=" + username + ", rollNo=" + rollNo + ", marks=" + marks + "]";
 	}
 	
+	public void copyValues(Student newStudent) {
+		setUserid(newStudent.getUserid());
+		setUsername(newStudent.getUsername());
+		setRollNo(newStudent.getRollNo());
+		setMarks(newStudent.getMarks());
+	}
+	
 }
