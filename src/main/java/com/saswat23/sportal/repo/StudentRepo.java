@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SimplePropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,16 @@ public class StudentRepo {
 
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
+	
+	ResultSetExtractor<List<Student>> rex = rs -> {
+		Student student=null;
+		this.students = new ArrayList<Student>();
+		while(rs.next()) {
+			student = new Student(rs.getString("userid"), rs.getString("username"), rs.getInt("rollno"), rs.getDouble("marks"));
+		}
+		this.students.add(student);
+		return this.students;
+	};
 	
 	RowMapper<Student> studentRowMapper = new SimplePropertyRowMapper<>(Student.class);
 	
@@ -84,7 +95,8 @@ public class StudentRepo {
 
 	public Student getStudent(String studentId) {
 		String sql = "select * from student where userid = ?";
-		Student stud = jdbcTemplate.queryForObject(sql, studentRowMapper, studentId);
+//		Student stud = jdbcTemplate.queryForObject(sql, studentRowMapper, studentId);
+		Student stud = jdbcTemplate.query(sql, rex, studentId).getFirst();
 		return stud;
 	}
 	
